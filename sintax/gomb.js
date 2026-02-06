@@ -2,8 +2,6 @@ import { muvelet, muveletLetrehoz } from "./function.js"
 
 class Inputs_oszt{
 
-    #calculate
-
     constructor(input1, input2, muveletStr, eredmenyDiv){
         this.input1 = input1;
         this.input2 = input2;
@@ -27,9 +25,18 @@ class Inputs_oszt{
         
     }
 
-    #calculate(input1, input2, eredmenyDiv){
+    #calculate(input1, input2, eredmenyDiv) {
         return () => {
-            const inp = 
+            const a = Number(input1.value);
+            const b = Number(input2.value);
+ 
+            const { result } = muvelet(
+                a,
+                b,
+                muveletLetrehoz(this.muveletStr)
+            );
+ 
+            eredmenyDiv.innerText = result;
         }
     }
 }
