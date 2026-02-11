@@ -5,3 +5,15 @@
  * @typedef {{nemzet: string, szerzo: string, mu: string, szerzo2: string, mu2: string}} RowspanType
  */
 
+export function addColspanRow(tbody, element) {
+    const tr = document.createElement('tr');
+    for (const key in element){
+        const td = document.createElement('td');
+        td.innerText = element[key];
+        if (key === 'szerelme1' && element.szerelme2 === undefined){
+            td.colSpan = 2;
+        }
+        tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+}
