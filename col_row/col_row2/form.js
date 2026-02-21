@@ -12,6 +12,11 @@ class FormController{
     #formFieldElemList;
 
     /**
+     * @type {HTMLFormElement}
+     */
+    #form;
+
+    /**
      *
      * @param {FormFieldType[]} formFieldList
      * @param {Manager} manager
