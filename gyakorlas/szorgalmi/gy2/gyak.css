@@ -1,0 +1,20 @@
+/*B*/
+tbody, td{ /*tbody & tr elemek köré pontozott szegély*/
+    border: dotted;
+}
+table{
+    border-collapse: collapse; /*átlapozódás miatt*/
+}
+
+tbody tr:nth-child(2n+1) { /*páratlan szmú sor -> bgc: lightblue*/
+    background-color: lightblue;
+}
+
+#dolgozat > p.error { /*id dolgozat div-nek a gyermeke: p.error osztállyal rendelkező p*/
+    color: red;
+}
+
+#dolgozat:has(a[href="cica.html"]:hover) > div { /*id dolgozat diven belül van #href ="cica.html" id vel rendelkező elem és fölé visszük az egeret akkor a #dolgozat diven belül bgc -> red */
+    background-color: red;
+}
+

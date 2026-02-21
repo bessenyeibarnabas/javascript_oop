@@ -1,0 +1,16 @@
+/*A*/
+table, thead, tr, th, td, tbody{ /*táblázat minden elemére 1px folytonos fekete szegély + collapse -> átlapozódás*/
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr td:nth-last-child(3), td:last-child { /*táblázat első és utolsó oszlopa bg color: yellow*/
+    background-color: yellow;}
+
+input + .error{ /*közvetlenül input mező utáni "p" színe piros*/
+    color: red;
+}
+
+.dolgozat:has(a[href="#"]:hover) label { /*class dolgozat diven belüli #href ="#" id vel rendelkező fölé visszük az egeret akkor a label-re 1px folytonos fekete szegélyt rak*/
+  border: 1px solid black;
+}
