@@ -1,0 +1,62 @@
+{
+    "colspanHeaderArray": [
+        {
+            "name": "Szerző"
+        },
+        {
+            "name": "Mű"
+        },
+        {
+            "name": "Szereplők",
+            "colspan": 2
+        }
+    ],
+    "colspanDataArr": [
+        {
+            "szerzo": "Katona József",
+            "mu": "Bánk bán",
+            "szereplo1": "Gertrudis királyné"
+        },
+        {
+            "szerzo": "Mikszáth Kálmán",
+            "mu": "Beszterce ostroma",
+            "szereplo1": "Pongrác István gróf",
+            "szereplo2": "Estella"
+        },
+        {
+            "szerzo": "Arany János",
+            "mu": "Toldi",
+            "szereplo1": "Toldi Miklós"
+        }
+    ],
+    "colspanFormFieldList": [
+        {
+            "label": "Szerző",
+            "name": "szerzo",
+            "id": "elso",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Mű",
+            "name": "mu",
+            "id": "masodik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Szereplő 1",
+            "name": "szereplo1",
+            "id": "harmadik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Szereplő 2",
+            "name": "szereplo2",
+            "id": "negyedik",
+            "type": "text",
+            "required": false
+        }
+    ]
+}

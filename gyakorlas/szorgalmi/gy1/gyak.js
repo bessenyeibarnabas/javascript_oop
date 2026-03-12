@@ -14,18 +14,20 @@ const createTableCell = (type, content, parent) => {
     return cell;
 }
 
-const tbodyRenderColspan = (tbody, element) => {
+const tbodyRenderRowspan = (tbody, element) => {
     const tr = document.createElement('tr');
     tbody.appendChild(tr);
     
-    createTableCell('td', element.szerzo, tr);
-    createTableCell('td', element.mu, tr);
-    const td3 = createTableCell('td', element.szereplo1, tr);
+    const td1 = createTableCell('td', element.terulet, tr);
+    createTableCell('td', element.evszam, tr);
+    createTableCell('td', element.esemyeny, tr);
     
-    if (element.szereplo2){
-        createTableCell('td', element.szereplo2, tr);
-    } else {
-        td3.colSpan = 2;
+    if (element.evszam2 && element.esemyeny2){
+        td1.rowSpan = 2;
+        const tr2 = document.createElement('tr'); 
+        tbody.appendChild(tr2);
+        createTableCell('td', element.evszam2, tr2);
+        createTableCell('td', element.esemyeny2, tr2);
     }
 }
 
@@ -91,7 +93,7 @@ const createForm = (createFieldsCallback, submitEventListener) => {
 }
 
 
-//---------------------------------------------------------------oop
+//--------------------------------------------------------------oop
 /**
  * @callback callback
  * @param {ColspanType || RowspanType}
@@ -144,11 +146,7 @@ class Table {
                 const th = document.createElement("th");
                 tr.appendChild(th);
                 for (const dat in item){
-                    if (dat === "colspan"){
-                        th.colSpan = item[dat];
-                    } else {
-                        th.innerText = item[dat];
-                    }
+                    th.innerText = item[dat];
                 }
             }
         });
@@ -160,8 +158,6 @@ class Table {
         });
     }
 }
-
-
 
 //----------------------------------------------------------------- form js
 const inpForm = (manager, formFieldList) =>{
@@ -192,6 +188,7 @@ const inpForm = (manager, formFieldList) =>{
 
             for (const field of inputObjects){
                 field.error.innerText = "";
+
             }
 
             for (const field of inputObjects){
@@ -201,21 +198,39 @@ const inpForm = (manager, formFieldList) =>{
                 }
             }
 
+            let evszam2Input, esemeny2Input, evszam2Error, esemeny2Error;
+            for (const field of inputObjects){
+                if (field.name === "evszam2") { evszam2Input = field.input; evszam2Error = field.error;}
+                if (field.name === "esemeny2") { esemeny2Input = field.input; esemeny2Error = field.error;}
+            }
+            
+
+            if (evszam2Input.value !== "" && esemeny2Input.value === ""){
+                esemeny2Error.innerText = "Kötelező";
+                valid = false;
+            }
+            if (evszam2Input.value === "" && esemeny2Input.value !== ""){
+                evszam2Error.innerText = "Kötelező";
+                valid = false;
+            }
+
             if (valid) {
-                let szerzoVal, muVal, szereplo1Val, szereplo2Val;
+                let teruletVal, evszamVal, esemeny1Val, evszam2Val, esemeny2Val;
                 
                 for (const field of inputObjects){
-                    if (field.name === "szerzo") szerzoVal = field.input.value;
-                    if (field.name === "mu") muVal = field.input.value;
-                    if (field.name === "szereplo1") szereplo1Val = field.input.value;
-                    if (field.name === "szereplo2") szereplo2Val = field.input.value;
+                    if (field.name === "terulet") teruletVal = field.input.value;
+                    if (field.name === "evszam") evszamVal = field.input.value;
+                    if (field.name === "esemeny1") esemeny1Val = field.input.value;
+                    if (field.name === "evszam2") evszam2Val = field.input.value;
+                    if (field.name === "esemeny2") esemeny2Val = field.input.value;
                 }
 
                 const obj = {
-                    szerzo: szerzoVal,
-                    mu: muVal,
-                    szereplo1: szereplo1Val,
-                    szereplo2: szereplo2Val !== "" ? szereplo2Val : undefined
+                    terulet: teruletVal,
+                    evszam: evszamVal,
+                    esemyeny: esemeny1Val,
+                    evszam2: evszam2Val !== "" ? evszam2Val : undefined,
+                    esemyeny2: esemeny2Val !== "" ? esemeny2Val : undefined
                 };
 
                 manager.addElement(obj);
@@ -230,19 +245,15 @@ const inpForm = (manager, formFieldList) =>{
 //----------------------------------------------------------------- data
 const manager = new Manager();
 
-const table = new Table(data.colspanHeaderArray, manager);
-table.setAppendRow(tbodyRenderColspan);
+const table = new Table(data.rowspanHeaderArray, manager);
+table.setAppendRow(tbodyRenderRowspan);
 
-inpForm(manager, data.colspanFormFieldList);
+inpForm(manager, data.rowspanFormFieldList);
 
 
-
-for (const item of data.colspanDataArr){
+for (const item of data.rowspanTableArray){
     manager.addElement(item);
 }
-
-
-
 
 
 

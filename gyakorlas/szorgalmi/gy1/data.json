@@ -1,0 +1,71 @@
+{
+    "rowspanHeaderArray": [
+        {
+            "ter_h": "Terület"
+        },
+        {
+            "ev_h": "Évszám"
+        },
+        {
+            "ese_h": "Esemény"
+        }
+    ],
+    "rowspanTableArray": [
+        {
+            "terulet": "Amerika",
+            "evszam": "1861–1865",
+            "esemyeny": "polgárháború"
+        },
+        {
+            "terulet": "Európa",
+            "evszam": "1914 június 28",
+            "esemyeny": "merénylet Szarajevóban",
+            "evszam2": "1914 július 28",
+            "esemyeny2": "Első világháború"
+        },
+        {
+            "terulet": "Oroszország",
+            "evszam": "1917",
+            "esemyeny": "oroszországi forradalom és bolsevik hatalomátvétele",
+            "evszam2": "1922",
+            "esemyeny2": "Szovjetunió megalakulása"
+        }
+    ],
+    "rowspanFormFieldList": [
+        {
+            "label": "Terület",
+            "name": "terulet",
+            "id": "elso",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Évszám1",
+            "name": "evszam",
+            "id": "masodik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Esemény1",
+            "name": "esemeny1",
+            "id": "harmadik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Évszám 2",
+            "name": "evszam2",
+            "id": "negyedik",
+            "type": "text",
+            "required": false
+        },
+        {
+            "label": "Esemény 2",
+            "name": "esemeny2",
+            "id": "otodik",
+            "type": "text",
+            "required": false
+        }
+    ]
+}

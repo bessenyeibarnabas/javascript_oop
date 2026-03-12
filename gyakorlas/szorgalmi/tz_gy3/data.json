@@ -1,0 +1,71 @@
+{
+    "rowspanHeaderArray": [
+        {
+            "name": "Ókori település"
+        },
+        {
+            "name": "Ágazat"
+        },
+        {
+            "name": "Példa"
+        }
+    ],
+    "rowspanTableArray": [
+        {
+            "telepules": "Athén",
+            "agazat": "politika",
+            "pelda": "demokrácia",
+            "agazat2": "tudomány",
+            "pelda2": "filozófia"
+        },
+        {
+            "telepules": "Egyiptom",
+            "agazat": "mezőgazdaság",
+            "pelda": "csatornák"
+        },
+        {
+            "telepules": "Spárta",
+            "agazat": "neveléstudomány",
+            "pelda": "agogé",
+            "agazat2": "harcászat",
+            "pelda2": "hoplita"
+        }
+    ],
+    "rowspanFormFieldList": [
+        {
+            "label": "Ókori település",
+            "name": "telepules",
+            "id": "elso",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Ágazat",
+            "name": "agazat",
+            "id": "masodik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Példa",
+            "name": "pelda",
+            "id": "harmadik",
+            "type": "text",
+            "required": true
+        },
+        {
+            "label": "Ágazat 2",
+            "name": "agazat2",
+            "id": "negyedik",
+            "type": "text",
+            "required": false
+        },
+        {
+            "label": "Példa 2",
+            "name": "pelda2",
+            "id": "otodik",
+            "type": "text",
+            "required": false
+        }
+    ]
+}
