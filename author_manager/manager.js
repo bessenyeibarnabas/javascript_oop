@@ -2,7 +2,10 @@
  * @callback tableCallback;
  * @param {Author[]}
  * @returns {void}
- */
+ * @callback addElementResultCallback
+ * @param {string} message
+ * @returns {void}
+*/
 class AuthorManager{
     /**
      * @type {Author[]}
@@ -12,30 +15,47 @@ class AuthorManager{
      * @type {tableCallback}
      */
     #tableCallback;
-    
-    set tableCallback(value){
-        this.#tableCallback = value
-    }
-
+ 
+    /**
+     * @ty
+     */
+    #addElementResultCallback;
     constructor(){
         this.#authorList = [];
     }
-
+ 
     /**
-     * 
-     * @param {import(".").AuthorType} element 
+     * @param {tableCallback} value
+     */
+    set tableCallback(value){
+        this.#tableCallback = value;
+    }
+ 
+    /**
+     * @param {AuthorType} element
      */
     addElement(element){
         const author = new Author();
-        author.is = this.#authorList.length;
+        author.id = this.#authorList.length;
         author.name = element.author;
-        author.work = element.work
-        author.concept = element.concept
-        this.#authorList.push(author)
+        author.work = element.work;
+        author.concept = element.concept;
+        if(author.validate()){
+            this.#authorList.push(author);
+            this.#addElementResultCallback("Sikeres adatfelvétel.")
+        }else{
+            this.#addElementResultCallback("Nem volt sikeres adatfelvétel.")
+        }
+        
     }
-
+ 
+ 
     getAllElement(){
-        this.#tableCallback(this.#authorList)
+        this.#tableCallback(this.#authorList);
+    }
+ 
+    set addElementResultCallback(value){
+        this.#addElementResultCallback = value;
     }
 }
  
@@ -56,26 +76,41 @@ class Author{
      * @type {string}
      */
     #concept;
-
+ 
     get id(){
-        return this.#id
+        return this.#id;
     }
-
-    get (){
-        return this.#name
+    get name(){
+        return this.#name;
     }
-
     get work(){
         return this.#work
     }
-
     get concept(){
-        return this.#concept
+        return this.#concept;
+    }
+ 
+    set id(value){
+        this.#id = value;
+    }
+   
+    set name(value){
+        this.#name = value;
+    }
+   
+    set work(value){
+        this.#work = value;
+    }
+   
+    set concept(value){
+        this.#concept = value;
     }
 
-    get value(){
-        
+    validate(){
+        return this.#name
     }
+ 
 }
  
 export {AuthorManager}
+ 

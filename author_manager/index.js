@@ -1,11 +1,8 @@
-import { FormView } from "./form.js"
-import { NavBar } from "./navigationbar.js"
-import { TableView } from "./table.js"
+import { FormView } from "./form.js";
+import { AuthorManager } from "./manager.js";
+import { NavBar } from "./navBar.js"
+import { TableView } from "./table.js";
 
-/**
- * @typedef {{id: number, author?: string, work?: string, concept?: string}} AuthorType
- * @typedef {{id: string, label: string, name: string}} FormFieldType
- */
 const formFields = [{
     id: 'author',
     label: 'Név',
@@ -23,21 +20,27 @@ const formFields = [{
 }]
 
 const headerArray = ['Szerző', 'Mű', 'Fogalom']
+const manager = new AuthorManager();
 
-const navbar = new NavBar
-navbar.appendTo(document.body)
-manager.addElement({
-    author: "aaa",
-    concept: "bbb",
-    work: "cccc"
-})
-const tableView = new TableView("Table", headerArray)
-tableView.appendTo(document.body)
-navbar.addViewElement("táblázat", tableView)
 
-const formView = new FormView("tableForm")
-formView.appendTo(document.body)
-navbar.addViewElement("Form", formView)
 
-navbar.activate("table")
-manager.getAllElement()
+
+/**
+ * @typedef {{id: number, author?: string, work?: string, concept?: string}} AuthorType
+ * @typedef {{id: string, label: string, name: string}} FormFieldType
+ */
+
+
+const navBar = new NavBar();
+navBar.appendTo(document.body);
+
+const tableView = new TableView('Table', headerArray, manager);
+tableView.appendTo(document.body);
+navBar.addViewElement('Táblázat', tableView);
+
+const formView = new FormView('TableForm', formFields, manager);
+formView.appendTo(document.body);
+navBar.addViewElement('Form', formView);
+navBar.activate(tableView.id);
+
+manager.getAllElement();

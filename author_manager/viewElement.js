@@ -16,39 +16,39 @@ class ViewElement{
      * @type {activateCallback}
      */
     #activateCallback
- 
+
     get div(){
         return this.#div
     }
- 
+
     /**
-     * @param {activateCallback} value
+     * @param {activateCallback} value 
      */
     set activateCallback(value){
         this.#activateCallback = value;
     }
- 
+
     /**
-     *
-     * @param {string} id
+     * 
+     * @param {string} id 
      */
     constructor(id){
         this.#id = id;
         this.#div = document.createElement("div");
         this.#div.id = id;
     }
- 
+
     /**
-     *
-     * @param {HTMLElement} parent
+     * 
+     * @param {HTMLElement} parent 
      */
     appendTo(parent){
         parent.appendChild(this.#div);
     }
- 
+
     /**
-     *
-     * @param {string} id
+     * 
+     * @param {string} id 
      */
     activate(id){
         if(this.#id == id){
@@ -61,10 +61,10 @@ class ViewElement{
             hide(this.#div);
         }
     }
- 
+
     get id(){
         return this.#id;
     }
 }
- 
+
 export {ViewElement}
