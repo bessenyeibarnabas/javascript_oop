@@ -27,7 +27,7 @@ const autoArr = [
         name: 'E autó',
         brand: 'Mercedes',
         color: "kék",
-        price: 19
+        price: 1999
     },
     {
         name: 'F autó',
@@ -40,12 +40,12 @@ const autoArr = [
 //Összegezze az autók árait!
 let ossz = 0
 for(let i = 0; i < autoArr.length; i++){
-    ossz+= autoArr[i].price
+    ossz+=autoArr[i].price
 }
 console.log(ossz)
 
 //Számolja meg kék autókat!
-count = 0
+let count = 0
 for(let i = 0; i < autoArr.length; i++){
     if(autoArr[i].color === "kék"){
         count++
@@ -62,18 +62,20 @@ for(let i = 0; i < autoArr.length; i++){
 }
 console.log(val)
 
+
 //Keresse meg azt a BMW-t aminek az ára nagyobb 20-nál!
 let i = 0
-while(i < autoArr.length && !(autoArr[i].brand === 'BMW' && autoArr[i].price > 20)){
+while(i < autoArr.length && !(autoArr[i].brand === "BMW" && autoArr[i].price > 20)){
     i++
 }
 if(i < autoArr.length){
     console.log(autoArr[i])
 }
 
+
 //Keresse meg a legdrágább autót!
 let max = 0
-for(let i = 0; i < autoArr.length; i++){
+for(let i = 1; i < autoArr.length; i++){
     if(autoArr[i].price > autoArr[max].price){
         max = i
     }
@@ -81,13 +83,15 @@ for(let i = 0; i < autoArr.length; i++){
 console.log(autoArr[max])
 
 //Rendezze az autókat ár szerint csökkenő sorrendbe!
-for(let i = 0; i< autoArr.length; i++){
+for(let i = 0; i < autoArr.length; i++){
     for(let j = i+1; j < autoArr.length; j++){
-        if(autoArr[i].price >autoArr[j].price){
-            let tmp = autoArr[i];
-            autoArr[i] = autoArr[j];
-            autoArr[j] = tmp;
+        if(autoArr[i].price < autoArr[j].price){
+            const tmp = autoArr[i]
+            autoArr[i] = autoArr[j]
+            autoArr[j] = tmp
         }
     }
 }
 console.log(autoArr)
+
+//h
