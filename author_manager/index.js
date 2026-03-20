@@ -1,4 +1,5 @@
 import { FormView } from "./form.js";
+import { ImportView } from "./importExport.js";
 import { AuthorManager } from "./manager.js";
 import { NavBar } from "./navBar.js"
 import { TableView } from "./table.js";
@@ -24,7 +25,6 @@ const manager = new AuthorManager();
 
 
 
-
 /**
  * @typedef {{id: number, author?: string, work?: string, concept?: string}} AuthorType
  * @typedef {{id: string, label: string, name: string}} FormFieldType
@@ -41,6 +41,11 @@ navBar.addViewElement('Táblázat', tableView);
 const formView = new FormView('TableForm', formFields, manager);
 formView.appendTo(document.body);
 navBar.addViewElement('Form', formView);
+
+const importExport = new ImportView("importexport", manager);
+importExport.appendTo(document.body);
+navBar.addViewElement("import/export", importExport);
+
 navBar.activate(tableView.id);
 
-manager.getAllElement();
+

@@ -1,7 +1,7 @@
 import { createInputAndErrorDiv } from "./gomszab.min.js";
 import { AuthorManager } from "./manager.js";
 import { ViewElement } from "./viewElement.js";
- 
+
 class FormView extends ViewElement{
    /**
     * @type {FormField[]}
@@ -16,10 +16,10 @@ class FormView extends ViewElement{
     */
    #form;
    /**
-    *
-    * @param {string} id
-    * @param {import("./index.js").FormFieldType[]} formFieldList
-    * @param {AuthorManager} manager
+    * 
+    * @param {string} id 
+    * @param {import("./index.js").FormFieldType[]} formFieldList 
+    * @param {AuthorManager} manager 
     */
  constructor(id, formFieldList, manager){
     super(id);
@@ -34,7 +34,6 @@ class FormView extends ViewElement{
     button.innerText = "küldés";
     form.appendChild(button);
     const res = document.createElement("div");
-    res.innerText = "div";
     this.div.appendChild(res);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -42,9 +41,12 @@ class FormView extends ViewElement{
       this.#manager.addElement(elem);
     })
     this.div.appendChild(form);
-    this.#manager.addElementResultCallback = (result) => {
+    this.#manager.addElementResultCallback = (result) =>{
       res.innerText = result;
     }
+    setTimeout(() =>{
+      res.innerText = "";
+    }, 1500)
  }
  /**
   * @returns {import("./index.js").AuthorType}
@@ -55,19 +57,18 @@ class FormView extends ViewElement{
     */
    let result = {}
    for (const field of this.#formInputList) {
-      if(field.validate){
+      if(field.validate()){
       result[field.name] = field.value;
-      return result;
       }
    }
    return result;
  }
 }
- 
- 
- 
- 
- 
+
+
+
+
+
 class FormField{
    /**
     * @type {string}
@@ -81,11 +82,11 @@ class FormField{
     * @type {HTMLDivElement}
     */
    #errorDiv;
- 
+
    get name(){
       return this.#name;
    }
- 
+
     get value(){
       if(this.#inputElement.value){
          return this.#inputElement.value;
@@ -94,13 +95,13 @@ class FormField{
          return undefined;
       }
     }
- 
+
     /**
-     *
-     * @param {string} id
-     * @param {string} label
-     * @param {string} name
-     * @param {HTMLFormElement} parent
+     * 
+     * @param {string} id 
+     * @param {string} label 
+     * @param {string} name 
+     * @param {HTMLFormElement} parent 
      */
     constructor(id, label, name, parent){
       const {input, errorDiv} = createInputAndErrorDiv({id, label, name, parent})
@@ -114,7 +115,7 @@ class FormField{
     validate(){
       let result = true;
       if(!this.value){
-         this.#errorDiv.innerText = "mat";
+         this.#errorDiv.innerText = "Kötelező";
          result = false
       }
       else{
@@ -123,5 +124,5 @@ class FormField{
       return result;
     }
 }
- 
+
 export {FormView}
