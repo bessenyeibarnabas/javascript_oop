@@ -3,21 +3,22 @@ import {show, hide} from "./gomszab.min.js"
  * @callback activateCallback
  * @returns {void}
  */
-class ViewElement{
+class ViewElement{ //Ososztály a megjeleni tendČ sztályoknak
     /**
      * @type {HTMLDivElement}
      */
-    #div;
+    #div; // pëldänyositäskor létrehozunk egy divet az elemnek, tároljuk el benne
     /**
      * @type {string}
      */
-    #id;
+    #id;; // privat tulajdonság az osztály peldanyának
+
     /**
      * @type {activateCallback}
      */
     #activateCallback
 
-    get div(){
+    get div(){ //getter definiálása a divnek
         return this.#div
     }
 
@@ -25,40 +26,40 @@ class ViewElement{
      * @param {activateCallback} value 
      */
     set activateCallback(value){
-        this.#activateCallback = value;
+        this.#activateCallback = value;//// akkor fut le, amikor megjelenik elem a képer•nyón (opc irnális lásd: activdt függvény)
     }
 
     /**
      * 
      * @param {string} id 
      */
-    constructor(id){
-        this.#id = id;
-        this.#div = document.createElement("div");
-        this.#div.id = id;
+    constructor(id){//konstruktor. hemenŕti azonos i tóval
+        this.#id = id; //atonosító beállítása
+        this.#div = document.createElement("div") //;div létrehozó',] és d div privát ueállit-ás
+        this.#div.id = id; // div azonosítójának heÁ111thsa
     }
 
     /**
      * 
      * @param {HTMLElement} parent 
      */
-    appendTo(parent){
-        parent.appendChild(this.#div);
+    appendTo(parent){//// definiálunk egy függvény a példánynak. a bemeneti paraméter egv html el
+        parent.appendChild(this.#div); //; / htmL elemhez hozzácsatoljuk a div tulajdonságot (lásd konstrukt
     }
 
     /**
      * 
      * @param {string} id 
      */
-    activate(id){
-        if(this.#id == id){
-            show(this.#div);
-            if(this.#activateCallback){
-                this.#activateCallback();
+    activate(id){ //// függvényt definiólunk példánvoknak
+        if(this.#id == id){// ha a példány azonosítója megegyezik a bemeneti paraméterrel, akkor megjelenítjük a divet
+            show(this.#div); // megjelenítjük a divet
+            if(this.#activateCallback){ // ha van aktiválási callback, akkor meghívjuk
+                this.#activateCallback(); // meghívjuk a callbacket, ami akkor fut le, amikor megjelenik az elem a képernyőn (opcionális, lásd: activateCallback setter)
             }
         }
-        else{
-            hide(this.#div);
+        else{ //egyébként
+            hide(this.#div); //hn77áĺü771ik a? elemhe7 a hiddŕn os7tálvt
         }
     }
 
