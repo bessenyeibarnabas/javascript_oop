@@ -59,7 +59,7 @@ class ViewElement{ //Ososztály a megjeleni tendČ sztályoknak
             }
         }
         else{ //egyébként
-            hide(this.#div); //hn77áĺü771ik a? elemhe7 a hiddŕn os7tálvt
+            hide(this.#div); //// h0zzáfüfűzzük az elemhez a hidden css osztályt
         }
     }
 

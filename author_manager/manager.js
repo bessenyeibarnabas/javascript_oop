@@ -9,21 +9,21 @@
  * @param {string}  message
  * @returns {void}
 */
-class AuthorManager{
+class AuthorManager{ //def az authormanager osztályt
     /**
      * @type {Author[]}
      */
-    #authorList;
+    #authorList; //privát tulajdonság a szerzők listájának
     /**
      * @type {tableCallback}
      */
-    #tableCallback;
+    #tableCallback; //privát tulajdonság a table callback-jének
     /**
      * @type {ImportResultCallback}
      */
-    #importResultCallback;
+    #importResultCallback; //privát tulajdonság az import eredmény callback-jének
 
-    #addElementResultCallback;
+    #addElementResultCallback; //privát tulajdonság az elem hozzáadás eredmény callback-jének
     constructor(){
         this.#authorList = [];
     }
@@ -31,21 +31,21 @@ class AuthorManager{
     /**
      * @param {tableCallback} value 
      */
-    set tableCallback(value){
-        this.#tableCallback = value;
+    set tableCallback(value){ //setter a table callback-hez
+        this.#tableCallback = value; //értékül adjuk a privát table callback tulajdonságnak a bemeneti értéket
     }
 
     /**
      * @param {AuthorType} element
      */
-    addElement(element){
-        const author = new Author();
-        author.id = this.#authorList.length;
-        author.name = element.author;
-        author.work = element.work;
-        author.concept = element.concept;
-        if(author.value()){
-        this.#authorList.push(author);
+    addElement(element){ //def egy addElement metódust, ami egy AuthorType-ot vár bemenetként
+        const author = new Author(); //létrehozunk egy új Author példányt
+        author.id = this.#authorList.length; //beállítjuk az id-jét a jelenlegi szerzők számával
+        author.name = element.author; //beállítjuk a nevét a bemeneti elem author mezőjével
+        author.work = element.work; //beállítjuk a művét a bemeneti elem work mezőjével
+        author.concept = element.concept; //beállítjuk a konceptjét a bemeneti elem concept mezőjével
+        if(author.value()){ //meghívjuk a validate (lásd author .validate) ha valid
+        this.#authorList.push(author); //ha valid akkor hozzáadjuk a szerzők listájához
         this.#addElementResultCallback("Sikeres adatfelvétel.")
         }
         else{
@@ -57,35 +57,36 @@ class AuthorManager{
      * 
      * @param {import(".").AuthorType[]} elementList 
      */
-    addElementList(elementList){
-        for (const element of elementList) {
-            const author = new Author();
-            author.name = element.author;
-            author.work = element.work;
-            author.concept = element.concept;
-            author.concept = element.concept;
-            if(author.value()){
-                this.#authorList.push(author);
-                this.#importResultCallback("Siker");
+    addElementList(elementList){ //def egy addElementList metódust, ami egy AuthorType tömböt vár bemenetként
+        for (const element of elementList) { //végigiterálunk a bemeneti listán
+            const author = new Author(); //létrehozunk egy új Author példányt
+            author.id = this.#authorList.length; //beállítjuk az id-jét a jelenlegi szerzők számával
+            author.name = element.author; //beállítjuk a nevét a bemeneti elem author mezőjével
+            author.work = element.work; //beállítjuk a művét a bemeneti elem work mezőjével
+            author.concept = element.concept; //beállítjuk a konceptjét a bemeneti elem concept mezőjével
+            author.concept = element.concept; //beállítjuk a konceptjét a bemeneti elem concept mezőjével
+            if(author.value()){ //meghívjuk a validate (lásd author .validate) ha valid
+                this.#authorList.push(author); //ha valid akkor hozzáadjuk a szerzők listájához
+                this.#importResultCallback("Siker"); //és meghívjuk az import eredmény callback-jét a "Siker" üzenettel
             }
             else{
-                this.#importResultCallback("Sikertelen");
+                this.#importResultCallback("Sikertelen"); //ha nem valid akkor meghívjuk az import eredmény callback-jét a "Sikertelen" üzenettel
                 break;
             }
         }
     }
 
 
-    getAllElement(){
-        this.#tableCallback(this.#authorList);
+    getAllElement(){ //def a getAllElement fgv
+        this.#tableCallback(this.#authorList); //meghívjuk a table callback-jét a szerzők listájával
     }
 
-    getExportstring(){
-        const result = [];
-        for(const author of this.#authorList){
-            result.push(`${author.name};${author.work};${author.concept}`)
+    getExportstring(){ //def a getExportstring fgv, ami visszaad egy stringet
+        const result = []; //def üres tömb
+        for(const author of this.#authorList){ //végigiterálunk a szerzők listáján
+            result.push(`${author.name};${author.work};${author.concept}`) //a tömbhöz hozzáadunk egy stringet, ami a szerző nevét, művét és konceptjét tartalmazza, pontosvesszővel elválasztva
         }
-        return result.join("\n");
+        return result.join("\n"); //visszatérünk a tömb elemeinek egy stringjével, ahol az elemeket új sorral választjuk el
     }
 
     /**
@@ -102,58 +103,59 @@ class AuthorManager{
     }
 }
  
-class Author{
+class Author{ //def egy author entitáns osztályt
     /**
      * @type {string}
      */
-    #id;
+    #id; //privát tulajdonság az id-nek
         /**
      * @type {string}
      */
-    #name;
+    #name; //privát tulajdonság a névnek
         /**
      * @type {string}
      */
-    #work;
+    #work; //privát tulajdonság a műnek
         /**
      * @type {string}
      */
-    #concept;
+    #concept; //privát tulajdonság a konceptnek
 
-    get id(){
-        return this.#id;
+    get id(){ //getter az id-hez
+        return this.#id; //visszatérünk a privát id tulajdonsággal
     }
-    get name(){
-        return this.#name;
+    get name(){ //getter a névhez
+        return this.#name; //visszatérünk a privát név tulajdonsággal
     }
-    get work(){
-        return this.#work
+    get work(){ //getter a műhöz
+        return this.#work //visszatérünk a privát mű tulajdonsággal
     }
-    get concept(){
-        return this.#concept;
+    get concept(){ //getter a koncepthez
+        return this.#concept; //visszatérünk a privát koncept tulajdonsággal
     }
 
-    set id(value){
-        this.#id = value;
+    set id(value){ //setter az id-hez
+        this.#id = value; //beállítjuk a privát id tulajdonság értékét a bemeneti értékre
     }
     
-    set name(value){
-        this.#name = value;
+    set name(value){ //setter a névhez
+        this.#name = value; //beállítjuk a privát név tulajdonság értékét a bemeneti értékre
     }
     
-    set work(value){
-        this.#work = value;
+    set work(value){ //setter a műhöz
+        this.#work = value; //beállítjuk a privát mű tulajdonság értékét a bemeneti értékre
+
     }
     
-    set concept(value){
-        this.#concept = value;
+    set concept(value){ //setter a koncepthez
+        this.#concept = value; //értékül adjuk a privát koncept tulajdonságnak a bemeneti értéket
     }
 
     /**
      * @returns {boolean}
      */
-    value(){
-        return this.#name && this.#concept && this.#work;
+    value(){ //def egy value metódust, ami boolean értékkel tér vissza
+        return this.#name && this.#concept && this.#work; // ha mindennek helyes értéke van akkor I- tér vissza, egyébként H
     }
 }
 
